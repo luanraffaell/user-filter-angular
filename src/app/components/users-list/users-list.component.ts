@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IUser } from 'src/app/interfaces/user/user.interface';
-
+import { MatDialog } from '@angular/material/dialog';
+import { UserDetailsComponent } from '../user-details/user-details.component';
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
@@ -12,8 +13,16 @@ export class UsersListComponent {
 
   @Output('userSelected')userSelectedEmitt = new EventEmitter<IUser>();
 
+  constructor(public dialog: MatDialog) {}
+
   onUserSelected(usuario:IUser){
     console.log(usuario)
     this.userSelectedEmitt.emit(usuario);
+  }
+  openDialog(usuario:IUser){
+    this.dialog.open(UserDetailsComponent, {
+      data: usuario,
+      width:'500px'
+    });
   }
 }

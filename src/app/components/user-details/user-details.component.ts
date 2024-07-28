@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IUser } from 'src/app/interfaces/user/user.interface';
 
 @Component({
@@ -7,5 +8,13 @@ import { IUser } from 'src/app/interfaces/user/user.interface';
   styleUrls: ['./user-details.component.scss']
 })
 export class UserDetailsComponent {
-  @Input({required:true}) user: IUser = {} as IUser;
+  user: IUser = {} as IUser;
+
+  constructor(
+    public dialogRef: MatDialogRef<UserDetailsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: IUser,
+  ) {
+    this.user = data;
+  }
+
 }
