@@ -34,6 +34,7 @@ export class AppComponent implements OnInit {
 
   filterUserList(filterOption: IFilterOption, usersList: IUser[]): IUser[] {
     let filteredList: IUser[] = [];
+    filterOption.status = filterOption.status == true || filterOption.status == false ? filterOption.status : undefined;
     filteredList = this.filterUsersListByName(filterOption.name, usersList)
     filteredList = this.filterUsersListByStatus(filterOption.status, filteredList);
     filteredList = this.filterUsersListByDate(filterOption.startDate, filterOption.endDate, filteredList);
